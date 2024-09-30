@@ -43,8 +43,6 @@ class _ProductTitleWidgetState extends State<ProductTitleWidget> {
             MaterialPageRoute(
                 builder: (context) => ProductDetailPage(
                       id: widget.id,
-                      price: widget.price,
-                      discount: widget.discound,
                     )));
       },
       child: Container(

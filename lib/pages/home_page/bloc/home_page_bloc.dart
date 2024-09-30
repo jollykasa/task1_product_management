@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:task1/common/constant/app_constant.dart';
+import 'package:task1/common/constant/user_preferences.dart';
 
 import '../model/product_model.dart';
 
@@ -20,6 +21,12 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   _oninit() {
     on<HomePageInitialEvent>((event, emit) async {
       emit(HomePageLoadingState());
+      String? deleteProductId = UserPreferences.getProductId();
+      print(
+          "********************Product Id Delete product***********************");
+      print(UserPreferences.getProductId());
+      print(
+          "********************Product Id Delete product***********************");
       try {
         Dio _dio = Dio();
         Response response =
@@ -45,16 +52,25 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     on<AddProductHomePageEvent>((event, emit) async {
       emit(HomePageLoadingState());
       try {
+        print(
+            'title: ${event.name},category: ${event.category}, description: ${event.description},price: ${event.price},discountPercentage: ${event.discount},brand: ${event.brand},warrantyInformation: ${event.warranty},returnPolicy:${event.returnPolicy}, thumbnail: ${event.imagePath}');
         Dio _dio = Dio();
         Response response =
             await _dio.post('${AppConstant.baseUrl}/products/add', data: {
           'title': event.name,
           'category': event.category,
           'description': event.description,
-          'price': event.price
+          'price': event.price,
+          'discountPercentage': event.discount,
+          'brand': event.brand,
+          'warrantyInformation': event.warranty,
+          'returnPolicy': event.returnPolicy,
+          'thumbnail': event.imagePath,
         });
         if (response.data != null) {
+          log(response.data.toString());
           emit(HomeSucessState(successMessage: "Added Product Successfully"));
+          //list
         } else {
           emit(HomePageErrorState(message: "Product Not Added Successfully"));
         }

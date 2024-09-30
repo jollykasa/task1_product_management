@@ -8,13 +8,13 @@ sealed class ProductdetailEvent extends Equatable {
 }
 
 class ProductdetailInitialEvent extends ProductdetailEvent {
-  int id;
-  ProductdetailInitialEvent({required this.id});
+  final int id;
+  const ProductdetailInitialEvent({required this.id});
 }
 
 class ProductDeleteEvent extends ProductdetailEvent {
-  int productId;
-  ProductDeleteEvent({required this.productId});
+  final int productId;
+  const ProductDeleteEvent({required this.productId});
 }
 
 class ProductDetailUpdateEvent extends ProductdetailEvent {
@@ -24,11 +24,18 @@ class ProductDetailUpdateEvent extends ProductdetailEvent {
   final double discount;
   final double rating;
   final String description;
-  const ProductDetailUpdateEvent(
-      {required this.productId,
-      required this.name,
-      required this.price,
-      required this.discount,
-      required this.description,
-      required this.rating});
+  final String brand;
+  final String warranty;
+  final String returnPolicy;
+  const ProductDetailUpdateEvent({
+    required this.productId,
+    required this.name,
+    required this.price,
+    required this.discount,
+    required this.description,
+    required this.rating,
+    required this.brand,
+    required this.warranty,
+    required this.returnPolicy,
+  });
 }

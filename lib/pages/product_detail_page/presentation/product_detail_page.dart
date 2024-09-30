@@ -10,31 +10,19 @@ import 'package:task1/pages/product_detail_page/presentation/widget/rating_build
 
 class ProductDetailPage extends StatefulWidget {
   final int id;
-  final double? price;
-  final double? discount;
   const ProductDetailPage({
     super.key,
     required this.id,
-    this.price = 0,
-    this.discount = 0,
   });
   @override
   State<ProductDetailPage> createState() => _ProductDetailPageState();
 }
 
 class _ProductDetailPageState extends State<ProductDetailPage> {
-  double totalAmount = 0;
-  discountCalculation(price, discount) {
-    double discountAmount = price * (discount / 100);
-    totalAmount = price - discountAmount;
-  }
-
   @override
   void initState() {
     BlocProvider.of<ProductdetailBloc>(context)
         .add(ProductdetailInitialEvent(id: widget.id));
-    discountCalculation(widget.price, widget.discount);
-
     super.initState();
   }
 
@@ -46,11 +34,18 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: AppColors.successColor,
               content: Text('${state.message}')));
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const BottomNavigationPage()));
         }
         if (state is ProductdetailUpdateSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: AppColors.successColor,
               content: Text('${state.message}')));
+          BlocProvider.of<ProductdetailBloc>(context)
+              .add(ProductdetailInitialEvent(id: widget.id));
+          Navigator.pop(context);
         }
       },
       builder: (context, state) {
@@ -63,6 +58,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             );
           case ProductdetailInitial():
             final model = state.productDetailModel;
+            String totalAmount = ((model?.price ?? 0) -
+                    ((model?.discountPercentage ?? 0) / 100) *
+                        (model?.price ?? 0))
+                .toStringAsFixed(2);
             return Scaffold(
               appBar: AppBar(
                 title: Text(
@@ -123,11 +122,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                             onPressed: () {
                               BlocProvider.of<ProductdetailBloc>(context).add(
                                   ProductDeleteEvent(productId: widget.id));
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BottomNavigationPage()));
                             },
                             child: Text('OK', style: ConstantTextStyle.Font16),
                           ),
@@ -201,7 +195,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           ),
                           Text(
                             textAlign: TextAlign.start,
-                            '\$ ${totalAmount.toStringAsFixed(2)}',
+                            '\$ $totalAmount',
                             maxLines: 2,
                             style: ConstantTextStyle.FontRed18,
                           ),

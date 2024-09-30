@@ -64,10 +64,6 @@ class _ProductListState extends State<ProductList> {
                                       id: state.productModel?.products?[index]
                                               .id ??
                                           0,
-                                      price: state
-                                          .productModel?.products?[index].price,
-                                      discount: state.productModel
-                                          ?.products?[index].discountPercentage,
                                     )));
                       },
                       child: Container(

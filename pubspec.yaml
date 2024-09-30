@@ -48,7 +48,7 @@ dependencies:
   flutter_launcher_icons: ^0.14.1
 flutter_launcher_icons:
   android: true
-  image_path: "assets/images/product.png"
+  image_path: "assets/images/box.png"
 
 dev_dependencies:
   flutter_test:

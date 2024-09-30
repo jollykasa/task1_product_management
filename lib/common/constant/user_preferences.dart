@@ -22,4 +22,12 @@ class UserPreferences {
   static bool? isGetUserLoggedIn() {
     return _sharedPreferences?.getBool(AppConstant.keyLogin);
   }
+
+  static Future<void> setProductId(String productId) async {
+    await _sharedPreferences?.setString(_keyUsername, productId);
+  }
+
+  static String? getProductId() {
+    return _sharedPreferences!.getString(_keyUsername);
+  }
 }

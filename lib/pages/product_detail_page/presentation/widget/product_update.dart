@@ -4,7 +4,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:task1/common/constant/constant_color.dart';
 import 'package:task1/common/constant/constant_text_style.dart';
 import 'package:task1/common/constant/form_validator.dart';
-import 'package:task1/pages/bottom_navigation/bottom_navigation.dart';
 import 'package:task1/pages/product_detail_page/bloc/productdetail_bloc.dart';
 
 class ProductUpdate extends StatefulWidget {
@@ -251,19 +250,18 @@ class _ProductUpdateState extends State<ProductUpdate> {
                     child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            BlocProvider.of<ProductdetailBloc>(context).add(
-                                ProductDetailUpdateEvent(
-                                    productId: widget.id,
-                                    name: name.text,
-                                    description: description.text,
-                                    discount: double.parse(discount.text),
-                                    price: double.parse(price.text),
-                                    rating: ratingcontroller));
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const BottomNavigationPage()));
+                            BlocProvider.of<ProductdetailBloc>(context)
+                                .add(ProductDetailUpdateEvent(
+                              productId: widget.id,
+                              name: name.text,
+                              description: description.text,
+                              discount: double.parse(discount.text),
+                              price: double.parse(price.text),
+                              rating: ratingcontroller,
+                              brand: brandController.text,
+                              returnPolicy: returnPolicyController.text,
+                              warranty: warrantyController.text,
+                            ));
                           }
                         },
                         style: const ButtonStyle(

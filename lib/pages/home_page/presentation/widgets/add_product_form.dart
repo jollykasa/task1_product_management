@@ -160,8 +160,6 @@ class _AddProductFormState extends State<AddProductForm> {
                   const SizedBox(height: 5),
                   TextFormField(
                       controller: brandController,
-                      validator: (value) => FormValidator.validateFieldNotEmpty(
-                          value, "Product Brand"),
                       decoration: const InputDecoration(
                           hintText: 'Product Brand',
                           focusedBorder: OutlineInputBorder(
@@ -280,17 +278,14 @@ class _AddProductFormState extends State<AddProductForm> {
                               name: name.text,
                               price: double.parse(price.text),
                               category: category.toString(),
-                              brand: brandController.text,
+                              brand: brandController.text.isEmpty
+                                  ? "null"
+                                  : brandController.text,
                               discount: double.parse(discount.text),
                               imagePath: imageName.toString(),
                               returnPolicy: returnPolicyController.text,
                               warranty: warrantyController.text,
                             ));
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const BottomNavigationPage()));
                           }
                         },
                         style: const ButtonStyle(

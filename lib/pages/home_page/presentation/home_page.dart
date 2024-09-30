@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task1/common/constant/constant_color.dart';
 import 'package:task1/common/constant/constant_text_style.dart';
+import 'package:task1/pages/bottom_navigation/bottom_navigation.dart';
 import 'package:task1/pages/home_page/bloc/home_page_bloc.dart';
 import 'package:task1/pages/home_page/presentation/widgets/add_product.dart';
 import 'package:task1/pages/home_page/presentation/widgets/carousel_view.dart';
@@ -48,6 +49,10 @@ class _HomePageState extends State<HomePage> {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: AppColors.successColor,
                 content: Text('${state.successMessage}')));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const BottomNavigationPage()));
           }
           if (state is HomePageErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(

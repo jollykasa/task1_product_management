@@ -29,6 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: AppColors.successColor,
                 content: Text(state.message)));
+            Navigator.pop(context);
           } else if (state is SignupPageErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: AppColors.errorColor,
@@ -190,7 +191,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                             email: email.text,
                                             password: password.text,
                                             fullname: fname.text));
-                                    Navigator.pop(context);
                                   }
                                 },
                                 style: const ButtonStyle(

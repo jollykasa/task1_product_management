@@ -54,9 +54,9 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
           'price': event.price
         });
         if (response.data != null) {
-          emit(HomeSucessState(successMessage: "Added Product Sccessfully"));
+          emit(HomeSucessState(successMessage: "Added Product Successfully"));
         } else {
-          emit(HomePageErrorState(message: "Added Product Sccessfully"));
+          emit(HomePageErrorState(message: "Product Not Added Successfully"));
         }
       } on DioException catch (e) {
         emit(HomePageErrorState(message: e.response?.statusMessage.toString()));

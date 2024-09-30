@@ -19,7 +19,6 @@ class AddProductForm extends StatefulWidget {
 class _AddProductFormState extends State<AddProductForm> {
   final _formKey = GlobalKey<FormState>();
   String? category;
-
   String? imageName;
   File? imageFile;
   final TextEditingController name = TextEditingController();
@@ -135,7 +134,7 @@ class _AddProductFormState extends State<AddProductForm> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8))))),
                   Text(
-                    "Discound Percentage",
+                    "Discount Percentage",
                     style: ConstantTextStyle.Font14Bold,
                   ),
                   const SizedBox(height: 5),
@@ -144,9 +143,9 @@ class _AddProductFormState extends State<AddProductForm> {
                       keyboardType: TextInputType.number,
                       maxLength: 5,
                       validator: (value) => FormValidator.validateFieldNotEmpty(
-                          value, "Discound Percentage"),
+                          value, "Discount Percentage"),
                       decoration: const InputDecoration(
-                          hintText: 'Discound Percentage %',
+                          hintText: 'Discount Percentage %',
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             borderSide: BorderSide(color: Colors.teal),

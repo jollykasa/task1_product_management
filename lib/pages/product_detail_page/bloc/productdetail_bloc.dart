@@ -62,7 +62,7 @@ class ProductdetailBloc extends Bloc<ProductdetailEvent, ProductdetailState> {
             .put('${AppConstant.baseUrl}/products/${event.productId}');
         if (response.data != null) {
           log(response.data.toString());
-          emit(ProductdetailDeleteSuccess(
+          emit(ProductdetailUpdateSuccess(
               message: "Product Updated successfully"));
         }
       } on DioException catch (e) {

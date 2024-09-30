@@ -28,8 +28,15 @@ class ProductDetailError extends ProductdetailState {
 }
 
 class ProductdetailDeleteSuccess extends ProductdetailState {
-  String? message;
+  final String? message;
   ProductdetailDeleteSuccess({required this.message});
+  @override
+  List<Object?> get props => [message];
+}
+
+class ProductdetailUpdateSuccess extends ProductdetailState {
+  final String? message;
+  ProductdetailUpdateSuccess({required this.message});
   @override
   List<Object?> get props => [message];
 }

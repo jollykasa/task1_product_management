@@ -47,6 +47,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               backgroundColor: AppColors.successColor,
               content: Text('${state.message}')));
         }
+        if (state is ProductdetailUpdateSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: AppColors.successColor,
+              content: Text('${state.message}')));
+        }
       },
       builder: (context, state) {
         switch (state) {

@@ -6,7 +6,6 @@ import 'package:task1/common/constant/constant_text_style.dart';
 import 'package:task1/common/constant/form_validator.dart';
 import 'package:task1/pages/bottom_navigation/bottom_navigation.dart';
 import 'package:task1/pages/product_detail_page/bloc/productdetail_bloc.dart';
-import 'package:task1/pages/product_detail_page/presentation/product_detail_page.dart';
 
 class ProductUpdate extends StatefulWidget {
   final String name;

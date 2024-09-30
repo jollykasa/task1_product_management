@@ -50,11 +50,4 @@ class HomePageSearchState extends HomePageState {
 
   @override
   List<Object?> get props => [productModel];
-
-  HomePageSearchState copyWith({
-    ProductModel? productModel,
-  }) =>
-      HomePageSearchState(
-        productModel: productModel ?? this.productModel,
-      );
 }

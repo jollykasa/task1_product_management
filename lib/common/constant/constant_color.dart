@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const signButton = Color.fromARGB(255, 5, 99, 89);
+  static const lightTealColor = Color.fromARGB(255, 158, 240, 232);
   static const customTealColor = Color.fromARGB(255, 25, 214, 195);
   static const navigationColor = Color.fromARGB(255, 20, 129, 118);
   static const categoryButtonColor = Color.fromARGB(255, 17, 99, 91);

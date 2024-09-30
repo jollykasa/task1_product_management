@@ -16,9 +16,15 @@ class SignupPageBloc extends Bloc<SignupPageEvent, SignupPageState> {
         'email': event.email,
         'password': event.password,
       });
-      print("*****************Sign Up BLOC************************");
-      print(registerData);
-      print("*****************Sign Up BLOC************************");
+      if (registerData.isNotEmpty) {
+        print("**************SIGNUP PAGE BLOC*************************");
+        print(registerData);
+        print("**************SIGNUP PAGE BLOC*************************");
+        emit(const SignupPageSuccessState(message: "SignUp Successfully"));
+      } else {
+        emit(const SignupPageErrorState(
+            errormessage: "Error has occur.Please try again"));
+      }
     });
   }
 }

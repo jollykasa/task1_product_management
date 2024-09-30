@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +24,7 @@ class _CustomCarouselViewState extends State<CustomCarouselView> {
                 itemExtent: 300,
                 shrinkExtent: 150,
                 children: List<Widget>.generate(
-                  4,
+                  min(state.productModel?.products?.length ?? 0, 4),
                   (index) {
                     return CustomLayoutCard(
                       images:

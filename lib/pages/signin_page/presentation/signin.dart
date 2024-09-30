@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task1/common/constant/constant_color.dart';
 import 'package:task1/common/constant/form_validator.dart';
-import 'package:task1/pages/account_page/presentation/account.dart';
 import 'package:task1/pages/bottom_navigation/bottom_navigation.dart';
-import 'package:task1/pages/category_page/presentation/category_page.dart';
-import 'package:task1/pages/home_page/presentation/home_page.dart';
 import 'package:task1/pages/signin_page/bloc/sign_in_page_bloc.dart';
 import 'package:task1/pages/signup_page/presentation/signup.dart';
 
@@ -34,12 +31,6 @@ class _SignInPageState extends State<SignInPage> {
                 content: Text(state.message)));
             Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (context) => const BottomNavigationPage()));
-            Navigator.pushReplacement(context, MaterialPageRoute(
-              builder: (context) {
-                print("object");
-                return const BottomNavigationPage();
-              },
-            ));
           } else if (state is SignInErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 backgroundColor: AppColors.errorColor,

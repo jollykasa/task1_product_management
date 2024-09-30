@@ -21,6 +21,7 @@ class _AddProductFormState extends State<AddProductForm> {
   String? category;
 
   String? imageName;
+  File? imageFile;
   final TextEditingController name = TextEditingController();
   final TextEditingController price = TextEditingController();
   final TextEditingController discount = TextEditingController();
@@ -233,6 +234,12 @@ class _AddProductFormState extends State<AddProductForm> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8))))),
                   const SizedBox(height: 20),
+                  imageFile == null
+                      ? const SizedBox()
+                      : Center(
+                          child: SizedBox(
+                              height: 200, child: Image.file(imageFile!))),
+                  const SizedBox(height: 10),
                   Center(
                     child: ElevatedButton(
                       onPressed: () async {
@@ -240,9 +247,9 @@ class _AddProductFormState extends State<AddProductForm> {
                         final XFile? image =
                             await picker.pickImage(source: ImageSource.gallery);
                         if (image != null) {
-                          File imageFile = File(image.path);
+                          imageFile = File(image.path);
                           setState(() {
-                            imageName = imageFile.path.split('/').last;
+                            imageName = imageFile!.path.split('/').last;
                           });
                         }
                       },

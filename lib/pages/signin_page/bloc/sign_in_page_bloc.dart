@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:task1/common/constant/app_constant.dart';
 import 'package:task1/common/constant/user_preferences.dart';
 import 'package:task1/data/register_data.dart';
 import 'package:task1/data/user_data.dart';
@@ -16,6 +14,7 @@ class SignInPageBloc extends Bloc<SignInPageEvent, SignInPageState> {
   _onSignInSucess() {
     on<SignInPageNavigation>((event, emit) async {
       UserPreferences.setUserEmail(event.email);
+      UserPreferences.isSetUserLoggedIn(true);
       print("*******************REGISTER************************ ");
       print("$registerData");
       print("*******************REGISTER************************ ");

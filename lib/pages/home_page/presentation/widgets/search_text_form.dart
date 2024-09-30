@@ -29,6 +29,9 @@ class _SearchTextFormState extends State<SearchTextForm> {
             icon: const Icon(Icons.arrow_back_ios)),
         title: Form(
             child: TextFormField(
+          onTapOutside: (value) {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
           controller: searchField,
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
@@ -55,48 +58,69 @@ class _SearchTextFormState extends State<SearchTextForm> {
                 ),
               );
             case HomePageSearchState():
-              return ListView.builder(
-                  itemCount: state.productModel?.products?.length,
-                  itemBuilder: (context, index) {
-                    return searchField.text.isNotEmpty
-                        ? GestureDetector(
-                            onTap: () {
-                              print("click");
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ProductDetailPage(
-                                            id: state.productModel
-                                                    ?.products?[index].id ??
-                                                0,
-                                            price: state.productModel
-                                                ?.products?[index].price,
-                                            discount: state
-                                                .productModel
-                                                ?.products?[index]
-                                                .discountPercentage,
-                                          )));
-                            },
-                            child: ListTile(
-                              leading: CachedNetworkImage(
-                                progressIndicatorBuilder:
-                                    (context, url, progress) => const Center(
-                                        child: CircularProgressIndicator()),
-                                imageUrl:
-                                    "${state.productModel?.products?[index].thumbnail}",
-                                height: 150,
-                                fit: BoxFit.cover,
-                              ),
-                              title: Text(
-                                "${state.productModel?.products?[index].title}",
-                                style: ConstantTextStyle.Font14Bold,
-                              ),
-                              subtitle: Text(
-                                  "\$ ${state.productModel?.products?[index].price}"),
-                            ),
-                          )
-                        : const SizedBox();
-                  });
+              return state.productModel?.products != null &&
+                      state.productModel!.products!.isNotEmpty
+                  ? Container(
+                      margin: const EdgeInsets.all(10),
+                      child: ListView.builder(
+                          itemCount: state.productModel?.products?.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProductDetailPage(
+                                                id: state.productModel
+                                                        ?.products?[index].id ??
+                                                    0,
+                                                price: state.productModel
+                                                    ?.products?[index].price,
+                                                discount: state
+                                                    .productModel
+                                                    ?.products?[index]
+                                                    .discountPercentage,
+                                              )));
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: ListTile(
+                                    leading: SizedBox(
+                                      width: 60,
+                                      child: CachedNetworkImage(
+                                        progressIndicatorBuilder: (context, url,
+                                                progress) =>
+                                            const Center(
+                                                child:
+                                                    CircularProgressIndicator()),
+                                        imageUrl:
+                                            "${state.productModel?.products?[index].thumbnail}",
+                                        height: 150,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      "${state.productModel?.products?[index].title}",
+                                      style: ConstantTextStyle.Font14Bold,
+                                    ),
+                                    subtitle: Text(
+                                        "\$ ${state.productModel?.products?[index].price}"),
+                                  ),
+                                ));
+                          }),
+                    )
+                  : SizedBox(
+                      child: Center(
+                        child: Text(
+                          "Product not found",
+                          style: ConstantTextStyle.Font14Bold,
+                        ),
+                      ),
+                    );
             default:
               return const SizedBox();
           }

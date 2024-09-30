@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:task1/common/constant/app_constant.dart';
 import 'package:task1/common/constant/constant_color.dart';
 import 'package:task1/common/constant/constant_text_style.dart';
 import 'package:task1/common/constant/user_preferences.dart';
@@ -25,8 +23,7 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   _retrieveUserEmail() async {
-    var sharePref = await SharedPreferences.getInstance();
-    email = sharePref.getString(AppConstant.keyLogin);
+    email = UserPreferences.getUserEmail();
     setState(() {});
   }
 
@@ -129,7 +126,7 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   _userLogOut() {
-    UserPreferences.deleteUser();
+    UserPreferences.isSetUserLoggedIn(false);
     Navigator.pushReplacement(
         context, MaterialPageRoute(builder: (context) => const SignInPage()));
   }

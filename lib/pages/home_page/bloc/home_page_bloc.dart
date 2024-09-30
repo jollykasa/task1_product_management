@@ -18,7 +18,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   }
 
   _oninit() {
-    on<HomePageEvent>((event, emit) async {
+    on<HomePageInitialEvent>((event, emit) async {
       emit(HomePageLoadingState());
       try {
         Dio _dio = Dio();

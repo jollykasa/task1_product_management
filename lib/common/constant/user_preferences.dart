@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:task1/common/constant/app_constant.dart';
 
 class UserPreferences {
   static const _keyUsername = 'username';
@@ -10,11 +11,15 @@ class UserPreferences {
     await _sharedPreferences!.setString(_keyUsername, email);
   }
 
-  String? getUserEmail() {
+  static String? getUserEmail() {
     return _sharedPreferences!.getString(_keyUsername);
   }
 
-  static Future deleteUser() async {
-    await _sharedPreferences!.remove(_keyUsername);
+  static Future<void> isSetUserLoggedIn(bool isLoggedIn) async {
+    await _sharedPreferences?.setBool(AppConstant.keyLogin, isLoggedIn);
+  }
+
+  static bool? isGetUserLoggedIn() {
+    return _sharedPreferences?.getBool(AppConstant.keyLogin);
   }
 }
